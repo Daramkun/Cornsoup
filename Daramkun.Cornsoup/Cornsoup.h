@@ -1,4 +1,5 @@
 #ifndef __CORNSOUP_H__
+#define __CORNSOUP_H__
 
 #ifdef WIN32
 #include <Windows.h>
