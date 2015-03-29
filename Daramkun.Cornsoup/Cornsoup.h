@@ -1,4 +1,5 @@
 #ifndef __CORNSOUP_H__
+#define __CORNSOUP_H__
 
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_NON_CONFORMING_SWPRINTFS
