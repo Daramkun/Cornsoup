@@ -50,6 +50,13 @@ void cornsoup_Destroy ()
 #endif
 }
 
+void cornsoup_SetTitle ( const char * title )
+{
+#ifdef WIN32
+	SetConsoleTitleA ( title );
+#endif
+}
+
 double cornsoup_GetTime ()
 {
 #ifdef WIN32
@@ -117,8 +124,8 @@ void cornsoup_Flush ()
 			g_elapsTime -= 1;
 		}
 
-		wchar_t fpsText [ 32 ];
-		wsprintf ( fpsText, TEXT ( "FPS: %d" ), ( int ) g_fps );
+		char fpsText [ 32 ];
+		sprintf ( fpsText, "FPS: %d", ( int ) g_fps );
 		cornsoup_SetCharacterColor ( ( CornsoupColor ) ( CornsoupColor_ForegroundGreen | CornsoupColor_BackgroundDefault ) );
 		cornsoup_DrawText ( fpsText, 0, 0 );
 	}
@@ -137,7 +144,7 @@ void cornsoup_Flush ()
 #endif
 }
 
-void cornsoup_DrawChar ( wchar_t ch, unsigned x, unsigned y )
+void cornsoup_DrawChar ( char ch, unsigned x, unsigned y )
 {
 #ifdef WIN32
 	if ( x >= g_width || x < 0 )
@@ -145,18 +152,18 @@ void cornsoup_DrawChar ( wchar_t ch, unsigned x, unsigned y )
 	if ( y >= g_height || y < 0 )
 		return;
 
-	g_charBuffer [ y * g_width + x ].Char.UnicodeChar = ch;
+	g_charBuffer [ y * g_width + x ].Char.AsciiChar = ch;
 	g_charBuffer [ y * g_width + x ].Attributes = g_charColor;
 #endif
 }
 
-void cornsoup_DrawText ( const wchar_t * text, unsigned x, unsigned y )
+void cornsoup_DrawText ( const char * text, unsigned x, unsigned y )
 {
 #ifdef WIN32
 	if ( y >= g_height || y < 0 )
 		return;
 
-	size_t len = wcslen ( text );
+	size_t len = strlen ( text );
 	for ( unsigned i = 0; i < len; ++i )
 	{
 		if ( x + i >= g_width || x + i < 0 )
@@ -191,4 +198,18 @@ void cornsoup_FillRect ( int x, int y, int width, int height )
 void cornsoup_FlagDrawFPS ( bool flag )
 {
 	g_flagDrawFPS = flag;
+}
+
+void cornsoup_PrintDebug ( const char * format, ... )
+{
+#ifdef WIN32
+	va_list vl;
+	char text [ 1024 ];
+
+	va_start ( vl, format );
+	vsprintf ( text, format, vl );
+	va_end ( vl );
+
+	OutputDebugStringA ( text );
+#endif
 }
