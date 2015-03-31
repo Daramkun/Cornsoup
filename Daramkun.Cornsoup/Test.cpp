@@ -7,7 +7,7 @@ int main ( void )
 
 	int x = 1, y = 1;
 
-	while ( true )
+	while ( cornsoup_IsRunning () )
 	{
 		cornsoup_Clear ();
 

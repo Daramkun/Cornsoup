@@ -3,10 +3,11 @@
 unsigned g_width;
 unsigned g_height;
 
-bool g_flagDrawFPS;
-double g_lastTime, g_elapsTime;
+bool g_flagDrawFPS, g_flagFixedFPS;
+double g_lastTime, g_elapsTime, g_fixedLastTime;
 int g_frameCount;
 double g_fps;
+int g_fixedFPSValue;
 
 #ifdef WIN32
 HANDLE g_screenBuffer;
@@ -36,7 +37,9 @@ void cornsoup_Initialize (/* unsigned width, unsigned height */)
 #endif
 
 	g_flagDrawFPS = false;
-	g_lastTime = cornsoup_GetTime ();
+	g_flagFixedFPS = false;
+	g_fixedFPSValue = 30;
+	g_lastTime = g_fixedLastTime = cornsoup_GetTime ();
 
 	cornsoup_SetCharacterColor ( ( CornsoupColor ) ( CornsoupColor_ForegroundDefault | CornsoupColor_BackgroundDefault ) );
 }
@@ -48,6 +51,17 @@ void cornsoup_Destroy ()
 
 	delete [] g_charBuffer;
 #endif
+}
+
+bool cornsoup_IsRunning ()
+{
+	if ( g_flagFixedFPS )
+	{
+		double currentTime;
+		while ( ( currentTime = cornsoup_GetTime () ) - g_fixedLastTime < 1 / ( double ) g_fixedFPSValue );
+		g_fixedLastTime = currentTime;
+	}
+	return true;
 }
 
 void cornsoup_SetTitle ( const char * title )
@@ -101,6 +115,11 @@ void cornsoup_SetCharacterColor ( CornsoupColor charColor )
 #endif
 }
 
+void cornsoup_SetCharacterColor ( CornsoupColor backColor, CornsoupColor foreColor )
+{
+	cornsoup_SetCharacterColor ( ( CornsoupColor ) ( backColor | foreColor ) );
+}
+
 void cornsoup_Clear ()
 {
 #ifdef WIN32
@@ -113,7 +132,7 @@ void cornsoup_Flush ()
 	if ( g_flagDrawFPS )
 	{
 		++g_frameCount;
-		double currentTime = cornsoup_GetTime (); 
+		double currentTime = cornsoup_GetTime ();
 		g_elapsTime += ( currentTime - g_lastTime );
 		g_lastTime = currentTime;
 
@@ -198,6 +217,16 @@ void cornsoup_FillRect ( int x, int y, int width, int height )
 void cornsoup_FlagDrawFPS ( bool flag )
 {
 	g_flagDrawFPS = flag;
+}
+
+void cornsoup_FlagFixedFPS ( bool flag )
+{
+	g_flagFixedFPS = flag;
+}
+
+void cornsoup_FixedFPSValue ( int fps )
+{
+	g_fixedFPSValue = fps;
 }
 
 void cornsoup_PrintDebug ( const char * format, ... )

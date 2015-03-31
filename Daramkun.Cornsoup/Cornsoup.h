@@ -60,12 +60,15 @@ enum CornsoupColor
 void cornsoup_Initialize (/* unsigned width = 80, unsigned height = 25 */);
 void cornsoup_Destroy ();
 
+bool cornsoup_IsRunning ();
+
 void cornsoup_SetTitle ( const char * title );
 
 double cornsoup_GetTime ();
 bool cornsoup_GetKeyState ( char key );
 
 void cornsoup_SetCharacterColor ( CornsoupColor charColor );
+void cornsoup_SetCharacterColor ( CornsoupColor backColor, CornsoupColor foreColor );
 
 void cornsoup_Clear ();
 void cornsoup_Flush ();
@@ -76,6 +79,8 @@ void cornsoup_DrawText ( const char * text, unsigned x, unsigned y );
 void cornsoup_FillRect ( int x, int y, int width, int height );
 
 void cornsoup_FlagDrawFPS ( bool flag );
+void cornsoup_FlagFixedFPS ( bool flag );
+void cornsoup_FixedFPSValue ( int fps );
 
 void cornsoup_PrintDebug ( const char * format, ... );
 
