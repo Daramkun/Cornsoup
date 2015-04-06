@@ -54,3 +54,9 @@ Enemy* EnemyController::getEnemy ( int i )
 {
 	return &enemies [ i ];
 }
+
+void EnemyController::reset ()
+{
+	for ( int i = 0; i < MAX_ENEMY_COUNT; ++i )
+		enemies [ i ].kill ();
+}

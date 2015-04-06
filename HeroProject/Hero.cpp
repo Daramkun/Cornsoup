@@ -29,6 +29,7 @@ void Hero::draw ()
 void Hero::crashed ()
 {
 	--hp;
+	if ( hp < 0 ) hp = 0;
 }
 
 void Hero::reset ()

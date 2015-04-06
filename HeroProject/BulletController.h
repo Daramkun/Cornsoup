@@ -15,6 +15,9 @@ public:
 	void update ();
 	void draw ();
 
+public:
+	void reset ();
+
 private:
 	double lastRevived;
 	Bullet bullets [ MAX_BULLET_COUNT ];

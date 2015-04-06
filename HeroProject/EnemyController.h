@@ -16,6 +16,9 @@ public:
 	void draw ();
 
 public:
+	void reset ();
+
+public:
 	Enemy* getEnemy ( int i );
 
 private:

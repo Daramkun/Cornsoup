@@ -52,3 +52,9 @@ void BulletController::draw ()
 			bullets [ i ].draw ();
 	}
 }
+
+void BulletController::reset ()
+{
+	for ( int i = 0; i < MAX_BULLET_COUNT; ++i )
+		bullets [ i ].kill ();
+}
