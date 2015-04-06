@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Daramkun.Cornsoup", "Daramkun.Cornsoup\Daramkun.Cornsoup.vcxproj", "{A07CCFE6-BC61-491B-B35A-3958D797D05A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeroProject", "HeroProject\HeroProject.vcxproj", "{E5F110A6-3C20-4091-9826-6F5E8B30BFB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{A07CCFE6-BC61-491B-B35A-3958D797D05A}.Debug|Win32.Build.0 = Debug|Win32
 		{A07CCFE6-BC61-491B-B35A-3958D797D05A}.Release|Win32.ActiveCfg = Release|Win32
 		{A07CCFE6-BC61-491B-B35A-3958D797D05A}.Release|Win32.Build.0 = Release|Win32
+		{E5F110A6-3C20-4091-9826-6F5E8B30BFB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E5F110A6-3C20-4091-9826-6F5E8B30BFB9}.Debug|Win32.Build.0 = Debug|Win32
+		{E5F110A6-3C20-4091-9826-6F5E8B30BFB9}.Release|Win32.ActiveCfg = Release|Win32
+		{E5F110A6-3C20-4091-9826-6F5E8B30BFB9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
